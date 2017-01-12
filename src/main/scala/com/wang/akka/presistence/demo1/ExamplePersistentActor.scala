@@ -30,6 +30,7 @@ class ExamplePersistentActor(id:String) extends PersistentActor with ActorLoggin
     case evt: Evt                                 => updateState(evt); log.info("我在恢复：{}",evt)
     case SnapshotOffer(_, snapshot: ExampleState) => state = snapshot; log.info("我在恢复：{}",snapshot)
     case RecoveryCompleted => log.info("我已经恢复完了")
+    case SnapshotOffer(metadata, offeredSnapshot) => log.info("这是什么？？{}",offeredSnapshot)
   }
 
   val receiveCommand: Receive = {
@@ -43,6 +44,7 @@ class ExamplePersistentActor(id:String) extends PersistentActor with ActorLoggin
     case "print" => println(state)
     case SaveSnapshotSuccess(metadata)         => log.info("snapshot success:{}",metadata)
     case SaveSnapshotFailure(metadata, reason) => log.info("snapshot fail:{},reason:{}",metadata,reason)
+
   }
 
 }
