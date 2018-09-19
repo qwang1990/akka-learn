@@ -45,7 +45,7 @@ class FirstActor extends Actor with ActorLogging {
 
 object Main extends App{
 
-  val system = ActorSystem("Hello")
+  val system: ActorSystem = ActorSystem("Hello")
   val a: ActorRef = system.actorOf(Props[FirstActor], "firstActor")
 
 //  a ! MyActor.Greeting("heheheh")
